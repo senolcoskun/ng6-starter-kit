@@ -5,18 +5,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     devtool: "source-map",
-    entry: path.resolve(__dirname, 'client/app/app.js'),
-    output: {
-        filename: '[name].bundle.js',
-        publicPath: '/',
-        path: path.resolve(__dirname, 'dist')
-    },
+    entry: {},
     module: {
         rules: [
 
             {
                 test: /\.js?$/,
-                loader: "babel-loader"
+                exclude: /(node_modules)/,
+                use: ['ng-annotate-loader', 'babel-loader']
             }, {
                 test: /\.html$/,
                 loader: 'raw-loader'
@@ -29,13 +25,15 @@ module.exports = {
             }, {
                 test: /\.(jpe?g|png|gif)$/,
                 exclude: /(node_modules)/,
-                loader: 'url?limit=10000'
+                use: ExtractTextPlugin.extract({
+                    use: ['url-loader?limit=10000&name=images/[name].[ext]']
+                })
             }, {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff'
+                loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[name].[ext]'
             }, {
                 test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: 'url'
+                loader: 'url-loader'
             }, {
                 test: /\.(scss|sass)$/,
                 use: ExtractTextPlugin.extract({
@@ -47,7 +45,7 @@ module.exports = {
     },
     plugins: [
 
-        new ExtractTextPlugin("[name].min.css", {
+        new ExtractTextPlugin("css/[name].min.css", {
             allChunks: true
         }),
 
@@ -55,7 +53,14 @@ module.exports = {
             template: 'client/index.html',
             inject: 'body',
             hash: true
-        })
+        }),
+
+	    new webpack.optimize.CommonsChunkPlugin({
+	      name: 'vendor',
+	      minChunks: function (module, count) {
+	        return module.resource && module.resource.indexOf(path.resolve(__dirname, 'client')) === -1;
+	      }
+	    })
 
     ]
 
