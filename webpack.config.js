@@ -33,7 +33,7 @@ module.exports = {
                 loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[name].[ext]'
             }, {
                 test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: 'url-loader'
+                loader: 'url-loader?limit=10000&name=fonts/[name].[ext]'
             }, {
                 test: /\.(scss|sass)$/,
                 use: ExtractTextPlugin.extract({
