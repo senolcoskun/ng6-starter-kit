@@ -2,12 +2,13 @@
 
 .navbar {
   height: 6.5rem;
-  background: url('images/background.jpg');
+  background:url('images/background.jpg');
   padding: 1rem;
 
   .nav-links,
   .logo {
     display: inline-block;
+    background:url('images/footer-logo.png');
   }
 
   .logo {

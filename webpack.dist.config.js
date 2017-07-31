@@ -11,11 +11,11 @@ config.output = {
 config.plugins = config.plugins.concat([
 
   // Reduces bundles total size  
-  new webpack.optimize.UglifyJsPlugin({
+  /*new webpack.optimize.UglifyJsPlugin({
     mangle: {
       except: ['$super', '$', 'exports', 'require', 'angular']
     }
-  })
+  })*/
 ]);
 
 module.exports = config;

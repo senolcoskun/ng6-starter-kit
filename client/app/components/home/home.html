@@ -1,9 +1,39 @@
 <navbar></navbar>
-<header>
-  <hero></hero>
-</header>
 <main>
-  <div>
+<div>
     <h1>Found in {{ $ctrl.name }}.html</h1>
-  </div>
+    <hr>
+    
+    <!-- <h1>Found in {{ $ctrl.dataGridOptions }}.html</h1> -->
+    <div id="gridContainer" dx-data-grid="$ctrl.dataGridOptions"></div>
+    <hr>
+    <div class="demo-container">
+        <div class="dx-fieldset">
+            <div class="dx-field">
+                <div class="dx-field-label">Built-in icon</div>
+                <div class="dx-field-value">
+                    <div dx-button="$ctrl.doneButton"></div>
+                </div>
+            </div>
+            <div class="dx-field">
+                <div class="dx-field-label">Image icon</div>
+                <div class="dx-field-value">
+                    <div dx-button="$ctrl.weatherButton" class="weather"></div>
+                </div>
+            </div>
+            <div class="dx-field">
+                <div class="dx-field-label">External icon</div>
+                <div class="dx-field-value">
+                    <div dx-button="$ctrl.sendButton"></div>
+                </div>
+            </div>
+            <div class="dx-field">
+                <div class="dx-field-label">Icon only</div>
+                <div class="dx-field-value">
+                    <div dx-button="$ctrl.plusButton"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </main>

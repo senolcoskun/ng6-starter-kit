@@ -10,9 +10,13 @@ module.exports = {
         rules: [
 
             {
-                test: /\.js?$/,
+                test: /\.js$/,
                 exclude: /(node_modules)/,
                 use: ['ng-annotate-loader', 'babel-loader']
+            }, {
+                test: /\.jpe?g$|\.gif$|\.png$|\.svg$/,
+                exclude: /(node_modules)/,
+                loader: 'url-loader?limit=100&name=images/[name].[ext]'
             }, {
                 test: /\.html$/,
                 loader: 'raw-loader'
@@ -21,12 +25,6 @@ module.exports = {
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: ['css-loader']
-                })
-            }, {
-                test: /\.(jpe?g|png|gif)$/,
-                exclude: /(node_modules)/,
-                use: ExtractTextPlugin.extract({
-                    use: ['url-loader?limit=10000&name=images/[name].[ext]']
                 })
             }, {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
